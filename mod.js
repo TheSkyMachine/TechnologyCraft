@@ -71,12 +71,51 @@ function modTick()
 {
 if(getCarriedItem()==349)
 {
-jetpackTick();
-jetpackOn = true; 
+  jetpackOn = true;
+  var buttonWindow = null;
+  var activity = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
+  activity.runOnUiThread(new java.lang.Runnable({ run: function() {
+        try {
+          buttonWindow = new android.widget.PopupWindow();
+          var layout = new android.widget.RelativeLayout(activity);
+          var jetbutton = new android.widget.Button(activity);
+          jetbutton.setText("Activate");
+          jetbutton.setOnClickListener(new android.view.View.OnClickListener({
+                onClick: function(viewarg) {
+                  if(jetpackOn==true)
+                  {
+                    jetbutton.setText("Activate");
+                    jetpackTick();
+                  }
+                  else
+                  {
+                    jetbutton.setText("Deactivate");
+                  }
+                }
+          }));
+          layout.addView(button);
+          buttonWindow.setContentView(layout);
+          buttonWindow.setWidth(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
+          buttonWindow.setHeight(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
+          buttonWindow.setBackgroundDrawable(new
+android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
+          buttonWindow.showAtLocation(activity.getWindow().getDecorView(), android.view.Gravity.RIGHT | android.view.Gravity.BOTTOM, 0, 0);
+        }catch(problem){
+          print("Button could not be displayed: " + problem);
+        }
+  }}));
+}
 }
 else
 {
 jetpackOn = false;
+  var activity = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
+  activity.runOnUiThread(new java.lang.Runnable({ run: function() {
+        if(buttonWindow != null) {
+          buttonWindow.dismiss();
+          buttonwindow = null;
+        }
+  }}));
 }
 }
 
@@ -101,48 +140,4 @@ vector[1] = Math.sin(pitch)
 ;
 vector[2] = Math.sin(yaw)
 * Math.cos(pitch);
-}
-
-function jeton()
-{
-  jetbutton.setText("Activate");
-}
-
-var buttonWindow = null;
-
-function  newLevel() {
-  var activity = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
-  activity.runOnUiThread(new java.lang.Runnable({ run: function() {
-        try {
-          buttonWindow = new android.widget.PopupWindow();
-          var layout = new android.widget.RelativeLayout(activity);
-          var jetbutton = new android.widget.Button(activity);
-          jetbutton.setText("Activate");
-          jetbutton.setOnClickListener(new android.view.View.OnClickListener({
-                onClick: function(viewarg) {
-                  if(jetpackOn==)
-                }
-          }));
-          layout.addView(button);
-          buttonWindow.setContentView(layout);
-          buttonWindow.setWidth(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
-          buttonWindow.setHeight(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
-          buttonWindow.setBackgroundDrawable(new
-android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
-          buttonWindow.showAtLocation(activity.getWindow().getDecorView(), android.view.Gravity.RIGHT | android.view.Gravity.BOTTOM, 0, 0);
-        }catch(problem){
-          print("Button could not be displayed: " + problem);
-        }
-  }}));
-}
-
-function leaveGame()
-{
-  var activity = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
-  activity.runOnUiThread(new java.lang.Runnable({ run: function() {
-        if(buttonWindow != null) {
-          buttonWindow.dismiss();
-          buttonwindow = null;
-        }
-  }}));
 }
