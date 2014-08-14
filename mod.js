@@ -103,6 +103,11 @@ vector[2] = Math.sin(yaw)
 * Math.cos(pitch);
 }
 
+function jeton()
+{
+  jetbutton.setText("Activate");
+}
+
 var buttonWindow = null;
 
 function  newLevel() {
@@ -111,12 +116,11 @@ function  newLevel() {
         try {
           buttonWindow = new android.widget.PopupWindow();
           var layout = new android.widget.RelativeLayout(activity);
-          var button = new android.widget.Button(activity);
-          button.setText("Press Me!");
-          button.setOnClickListener(new android.view.View.OnClickListener({
+          var jetbutton = new android.widget.Button(activity);
+          jetbutton.setText("Activate");
+          jetbutton.setOnClickListener(new android.view.View.OnClickListener({
                 onClick: function(viewarg) {
-                  Level.explode(Player.getX(), Player.getY(), Player.getZ(), 3.0);
-                  clientMessage("This is our button!");
+                  if(jetpackOn==)
                 }
           }));
           layout.addView(button);
