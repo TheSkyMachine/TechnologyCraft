@@ -6,7 +6,7 @@
 /*----------VARIABLES----------*/
 
 /*----------ITEMS----------*/
-ModPE.setItem(326,"gold_horse_armor",0,"refinedIron",64);
+ModPE.setItem(326,"gold_horse_armor",0,"",64);
 ModPE.langEdit("item.refinedIron.name","Refined Iron");
 
 /*----------BLOCKS----------*/
@@ -16,5 +16,9 @@ Block.defineBlock(25,"Charger",[["mob_spawner",0],["piston_top_normal",0],["pist
 
 function newLevel()
 {
-  clientMessage("TechnologyCraft: The Revolution");
+  clientMessage(ChatColor.GOLD + "TechnologyCraft: The Revolution");
+  clientMessage(ChatColor.GOLD + "Version 1.0");
+  clientMessage(ChatColor.GOLD + "Mod Made By TechnologyCraft");
+  clientMessage(ChatColor.GOLD + "Follow Me On Twitter: " + ChatColor.DARK_BLUE + "@TheSkyMachine");
 }
+
